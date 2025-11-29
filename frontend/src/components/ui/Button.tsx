@@ -23,7 +23,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className
     )
 
-    if (asChild && typeof children === 'object' && 'props' in children) {
+    if (asChild && typeof children === 'object' && children !== null && 'props' in children) {
       return (
         <span className={baseClasses} ref={ref as any} {...(props as any)}>
           {children}
@@ -37,7 +37,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {children}
+        {children || null}
       </button>
     )
   }

@@ -14,8 +14,6 @@ import {
   TrendingUp, 
   CheckCircle,
   Sparkles,
-  Clock,
-  MapPin,
   Award,
   Eye
 } from 'lucide-react'
@@ -35,7 +33,7 @@ interface CandidateProfile {
 const CandidateDashboard = () => {
   const { user } = useAuthStore()
   const [candidate, setCandidate] = useState<CandidateProfile | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [_loading, setLoading] = useState(true)
   const [stats, setStats] = useState({
     profileViews: 0,
     applications: 0,

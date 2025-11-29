@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { 
-  Search, BookOpen, Video, FileText, TrendingUp, Calendar, User, 
+  Search, BookOpen, Video, FileText, TrendingUp, User, 
   ArrowRight, Sparkles, Award, Lightbulb, Briefcase, GraduationCap,
   Clock, Eye, Tag, Filter, X
 } from 'lucide-react'
@@ -108,11 +108,6 @@ const Resources = () => {
 
   const featuredArticles = articles.filter(article => article.featured)
   const regularArticles = filteredArticles.filter(article => !article.featured)
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('az-AZ', { day: 'numeric', month: 'long', year: 'numeric' })
-  }
 
   const formatViews = (count: number) => {
     if (count >= 1000) {

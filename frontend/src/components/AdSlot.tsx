@@ -14,10 +14,10 @@ interface AdSlotProps {
 }
 
 const AdSlot = ({
-  position,
+  position: _position,
   format,
   size = '300x250',
-  priority = 'standard',
+  priority: _priority,
   className = '',
   image = '/images/ogs0qz4cJFrQtg8KfkgXNQCcyQKFgHu6m9MGsvjv-2880--resize.webp',
   link = '#',

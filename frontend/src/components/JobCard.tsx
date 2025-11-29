@@ -18,7 +18,7 @@ interface JobCardProps {
   views?: number
 }
 
-const JobCard = ({ id, title, company, city, salary, category, experience, createdAt, logoUrl, views = 0 }: JobCardProps) => {
+const JobCard = ({ id, title, company, city, salary, category: _category, experience, createdAt, logoUrl, views = 0 }: JobCardProps) => {
   const navigate = useNavigate()
   
   const formatDate = (dateString: string) => {

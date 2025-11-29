@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Card'
 import { useAuthStore } from '../../store/authStore'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Button from '../../components/ui/Button'
 import api from '../../lib/api'
 import { 
@@ -10,8 +10,6 @@ import {
   Plus, 
   Briefcase, 
   Users, 
-  FileText, 
-  TrendingUp,
   CheckCircle,
   Clock,
   X,
@@ -70,10 +68,9 @@ interface Application {
 }
 
 const CompanyDashboard = () => {
-  const navigate = useNavigate()
   const { user } = useAuthStore()
   const [company, setCompany] = useState<CompanyProfile | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [_loading, setLoading] = useState(true)
   const [stats, setStats] = useState({
     totalJobs: 0,
     activeJobs: 0,

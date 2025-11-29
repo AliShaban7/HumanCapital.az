@@ -7,13 +7,13 @@ import {
   FileText, Lightbulb, Briefcase, Video, Award,
   Heart, MessageCircle, BookOpen
 } from 'lucide-react'
-import { Card, CardContent } from '../components/ui/Card'
+import { Card } from '../components/ui/Card'
 import Button from '../components/ui/Button'
 
 const ResourceDetails = () => {
   const { id } = useParams()
   const contentRef = useRef<HTMLDivElement>(null)
-  const [readingProgress, setReadingProgress] = useState(0)
+  const [_readingProgress, _setReadingProgress] = useState(0)
   const [isBookmarked, setIsBookmarked] = useState(false)
   const [isLiked, setIsLiked] = useState(false)
   const [likes, setLikes] = useState(1247)

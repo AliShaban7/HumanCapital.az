@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Linkedin, Instagram, Mail, Phone, MapPin, ArrowRight, Send, CheckCircle, Shield, Award, TrendingUp, Users, Briefcase, FileText, HelpCircle, Facebook, Twitter, Sparkles, Zap } from 'lucide-react'
+import { Linkedin, Instagram, Mail, Phone, MapPin, ArrowRight, Send, CheckCircle, TrendingUp, Users, Briefcase, FileText, Facebook, Sparkles, Zap } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import Button from './ui/Button'

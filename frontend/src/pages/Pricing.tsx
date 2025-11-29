@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
-  Check, 
   X, 
   ArrowRight, 
   Zap, 
@@ -16,11 +15,7 @@ import {
   Crown,
   Building2,
   CheckCircle2,
-  ArrowDown,
-  ArrowUp,
-  Info,
   Gift,
-  Clock,
   Headphones,
   BarChart3,
   Globe,

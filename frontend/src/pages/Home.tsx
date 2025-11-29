@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRight, Play, Users, Briefcase, TrendingUp, CheckCircle, Video, FileText, Zap, Shield, Settings, Banknote, Wrench, Megaphone, Code, Smartphone, Palette, Search, MapPin, Filter, Lock, Upload, Send, Bell, Star, Award, Sparkles, Rocket, Target, Clock, Loader2 } from 'lucide-react'
+import { ArrowRight, Play, Users, Briefcase, TrendingUp, CheckCircle, Zap, Shield, Settings, Banknote, Wrench, Megaphone, Code, Smartphone, Palette, Search, MapPin, Lock, Upload, Send, Bell, Star, Award, Sparkles, Rocket, Target } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import Button from '../components/ui/Button'
@@ -13,7 +13,7 @@ const Home = () => {
   const navigate = useNavigate()
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCity, setSelectedCity] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('')
+  const [_selectedCategory, _setSelectedCategory] = useState('')
   const [filteredCategory, setFilteredCategory] = useState<string>('')
   const [activeTab, setActiveTab] = useState<string>('type')
   const [selectedJobType, setSelectedJobType] = useState<string[]>([])
@@ -123,7 +123,7 @@ const Home = () => {
 
     const autoScroll = () => {
       if (scrollContainer) {
-        const { scrollWidth, clientWidth } = scrollContainer
+        const { scrollWidth } = scrollContainer
         const maxScroll = scrollWidth / 2 // Since we duplicate items
 
         scrollPosition += scrollSpeed

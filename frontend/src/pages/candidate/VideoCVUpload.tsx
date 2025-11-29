@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Upload, Video, Camera, Play, Square, CheckCircle, Lightbulb, X, ArrowLeft } from 'lucide-react'
+import { Upload, Video, Camera, Square, CheckCircle, Lightbulb, X, ArrowLeft } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '../../components/ui/Card'
 import Button from '../../components/ui/Button'
 import api from '../../lib/api'
@@ -9,7 +9,7 @@ import { useAuthStore } from '../../store/authStore'
 
 const VideoCVUpload = () => {
   const navigate = useNavigate()
-  const { user } = useAuthStore()
+  const { user: _user } = useAuthStore()
   const [mode, setMode] = useState<'select' | 'upload' | 'record'>('select')
   const [videoFile, setVideoFile] = useState<File | null>(null)
   const [videoBlob, setVideoBlob] = useState<Blob | null>(null)

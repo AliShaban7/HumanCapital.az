@@ -2,8 +2,8 @@ import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { 
   MapPin, Briefcase, GraduationCap, ArrowLeft, Play, Download, 
-  Mail, Phone, Globe, Award, Calendar, FileText, Star, CheckCircle,
-  Code, Sparkles, TrendingUp, Users, Lock
+  Mail, Phone, Globe, Award, Calendar, FileText, CheckCircle,
+  Code, Users
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import Button from '../components/ui/Button'
@@ -17,13 +17,17 @@ interface Candidate {
   profession?: string
   city?: string
   phone?: string
+  email?: string
   bio?: string
   videoUrl?: string
   cvUrl?: string
   portfolio?: string
+  photoUrl?: string
   skills?: string[]
   education?: any
   experience?: any
+  certifications?: any[]
+  languages?: any[]
 }
 
 const CandidateDetails = () => {
@@ -60,192 +64,6 @@ const CandidateDetails = () => {
     fetchCandidate()
   }, [id])
 
-  // Mock data for fallback (will be removed once API is fully working)
-  const mockCandidates = {
-    '1': {
-      id: '1',
-      firstName: 'Əli',
-      lastName: 'Məmmədov',
-      profession: 'Frontend Developer',
-      city: 'Bakı',
-      email: 'ali.mammadov@example.com',
-      phone: '+994 50 123 45 67',
-      portfolio: 'https://alimammadov.portfolio.com',
-      bio: '5 ildən çox təcrübəsi olan frontend developer. React, TypeScript, Vue.js texnologiyalarında ixtisaslaşmışam. Müasir veb tətbiqlərin inkişafında təcrübəliyəm və daim yeni texnologiyaları öyrənirəm. Komanda ilə işləməyi sevirəm və problemlərin həllində yaradıcı yanaşma tətbiq edirəm.',
-      videoUrl: 'https://example.com/video.mp4',
-      cvUrl: 'https://example.com/cv.pdf',
-      photoUrl: null,
-      skills: ['React', 'TypeScript', 'Vue.js', 'Node.js', 'CSS', 'HTML', 'JavaScript', 'Next.js', 'TailwindCSS', 'Git'],
-      education: [
-        {
-          degree: 'Bakalavr',
-          field: 'İnformasiya Texnologiyaları',
-          university: 'Bakı Dövlət Universiteti',
-          year: '2015-2019',
-          description: 'Kompyuter elmləri fakültəsində təhsil almışam. Əsas fənlər: proqramlaşdırma, verilənlər bazası, alqoritmlər.',
-        },
-      ],
-      experience: [
-        {
-          position: 'Senior Frontend Developer',
-          company: 'TechCorp Azerbaijan',
-          period: '2022 - indiyə qədər',
-          description: 'React və TypeScript əsaslı böyük miqyaslı veb tətbiqlərin inkişafı. Komanda lideri kimi fəaliyyət göstərmişəm. Performans optimallaşdırması və kod keyfiyyətinin yüksəldilməsi üzrə işləmişəm.',
-          achievements: [
-            'Proyekt performansını 40% artırdım',
-            'Komanda üzvlərinin təlimində iştirak etdim',
-            'Yeni texnologiyaların tətbiqində liderlik etdim',
-          ],
-        },
-        {
-          position: 'Frontend Developer',
-          company: 'Digital Solutions',
-          period: '2020 - 2022',
-          description: 'Vue.js və React əsaslı korporativ tətbiqlərin inkişafı. Müştəri ilə birbaşa əlaqədə olaraq, tələblərin analizi və həyata keçirilməsi.',
-          achievements: [
-            '3 böyük proyektin uğurla tamamlanması',
-            'Kod review prosesinin təkmilləşdirilməsi',
-          ],
-        },
-      ],
-      languages: [
-        { name: 'Azərbaycan dili', level: 'Ana dili' },
-        { name: 'İngilis dili', level: 'Sərbəst' },
-        { name: 'Rus dili', level: 'Orta' },
-      ],
-      certifications: [
-        { name: 'React Developer Certification', issuer: 'Meta', year: '2023' },
-        { name: 'TypeScript Advanced', issuer: 'Microsoft', year: '2022' },
-      ],
-    },
-    '2': {
-      id: '2',
-      firstName: 'Ayşə',
-      lastName: 'Həsənova',
-      profession: 'UI/UX Designer',
-      city: 'Bakı',
-      email: 'ayse.hasanova@example.com',
-      phone: '+994 50 234 56 78',
-      portfolio: 'https://aysehasanova.design',
-      bio: 'Yaradıcı UI/UX dizayner. İstifadəçi təcrübəsinə fokuslanaraq, gözəl və funksional interfeyslər yaradıram. Figma, Adobe XD, Sketch kimi alətlərdə işləyirəm.',
-      videoUrl: 'https://example.com/video.mp4',
-      cvUrl: 'https://example.com/cv.pdf',
-      photoUrl: null,
-      skills: ['Figma', 'Adobe XD', 'Sketch', 'Prototyping', 'User Research', 'Wireframing', 'Design Systems'],
-      education: [
-        {
-          degree: 'Bakalavr',
-          field: 'Dizayn',
-          university: 'Azərbaycan Dövlət İncəsənət Universiteti',
-          year: '2016-2020',
-          description: 'Qrafik dizayn və vizual kommunikasiya üzrə təhsil almışam.',
-        },
-      ],
-      experience: [
-        {
-          position: 'Senior UI/UX Designer',
-          company: 'DesignStudio',
-          period: '2021 - indiyə qədər',
-          description: 'Müştəri layihələri üzrə dizayn həllərinin yaradılması. İstifadəçi tədqiqatları və testlərin aparılması.',
-        },
-      ],
-      languages: [
-        { name: 'Azərbaycan dili', level: 'Ana dili' },
-        { name: 'İngilis dili', level: 'Sərbəst' },
-      ],
-      certifications: [
-        { name: 'UX Design Certificate', issuer: 'Google', year: '2023' },
-      ],
-    },
-    '3': {
-      id: '3',
-      firstName: 'Rəşad',
-      lastName: 'Əliyev',
-      profession: 'Backend Developer',
-      city: 'Gəncə',
-      email: 'rashad.aliyev@example.com',
-      phone: '+994 50 345 67 89',
-      portfolio: 'https://rashadaliyev.dev',
-      bio: 'Backend development sahəsində 6 il təcrübə. Node.js, Python, Go texnologiyalarında ixtisaslaşmışam. Mikroservis arxitekturası və cloud texnologiyaları ilə işləmişəm.',
-      videoUrl: 'https://example.com/video.mp4',
-      cvUrl: 'https://example.com/cv.pdf',
-      photoUrl: null,
-      skills: ['Node.js', 'Python', 'Go', 'PostgreSQL', 'MongoDB', 'Docker', 'Kubernetes', 'AWS', 'REST API', 'GraphQL'],
-      education: [
-        {
-          degree: 'Bakalavr',
-          field: 'Kompyuter Mühəndisliyi',
-          university: 'Azərbaycan Texniki Universiteti',
-          year: '2014-2018',
-          description: 'Kompyuter elmləri və mühəndislik üzrə təhsil.',
-        },
-      ],
-      experience: [
-        {
-          position: 'Backend Team Lead',
-          company: 'CloudTech Solutions',
-          period: '2021 - indiyə qədər',
-          description: 'Backend komandasının idarə edilməsi. Mikroservis arxitekturasının dizaynı və həyata keçirilməsi.',
-        },
-        {
-          position: 'Backend Developer',
-          company: 'StartupHub',
-          period: '2018 - 2021',
-          description: 'RESTful API-lərin inkişafı. Verilənlər bazasının optimallaşdırılması.',
-        },
-      ],
-      languages: [
-        { name: 'Azərbaycan dili', level: 'Ana dili' },
-        { name: 'İngilis dili', level: 'Sərbəst' },
-        { name: 'Rus dili', level: 'Yaxşı' },
-      ],
-      certifications: [
-        { name: 'AWS Certified Developer', issuer: 'Amazon', year: '2023' },
-        { name: 'Kubernetes Administrator', issuer: 'CNCF', year: '2022' },
-      ],
-    },
-    '4': {
-      id: '4',
-      firstName: 'Leyla',
-      lastName: 'Qasımova',
-      profession: 'Marketing Manager',
-      city: 'Bakı',
-      email: 'leyla.gasimova@example.com',
-      phone: '+994 50 456 78 90',
-      portfolio: 'https://leylagasimova.marketing',
-      bio: 'Rəqəmsal marketinq sahəsində 4 il təcrübə. SEO, PPC, content marketing və sosial media marketinqində ixtisaslaşmışam. Müştəri bazasının artırılması və brend tanınmışlığının yüksəldilməsi üzrə uğurlu layihələr həyata keçirmişəm.',
-      videoUrl: 'https://example.com/video.mp4',
-      cvUrl: 'https://example.com/cv.pdf',
-      photoUrl: null,
-      skills: ['SEO', 'PPC', 'Content Marketing', 'Social Media', 'Google Analytics', 'Email Marketing', 'Brand Management'],
-      education: [
-        {
-          degree: 'Bakalavr',
-          field: 'Marketinq',
-          university: 'Azərbaycan Dövlət İqtisad Universiteti',
-          year: '2017-2021',
-          description: 'Marketinq və reklam üzrə təhsil.',
-        },
-      ],
-      experience: [
-        {
-          position: 'Marketing Manager',
-          company: 'Digital Marketing Pro',
-          period: '2021 - indiyə qədər',
-          description: 'Rəqəmsal marketinq strategiyalarının hazırlanması və həyata keçirilməsi. Komandanın idarə edilməsi.',
-        },
-      ],
-      languages: [
-        { name: 'Azərbaycan dili', level: 'Ana dili' },
-        { name: 'İngilis dili', level: 'Sərbəst' },
-        { name: 'Türk dili', level: 'Yaxşı' },
-      ],
-      certifications: [
-        { name: 'Google Ads Certification', issuer: 'Google', year: '2023' },
-        { name: 'Facebook Blueprint', issuer: 'Meta', year: '2022' },
-      ],
-    },
-  }
 
   if (loading) {
     return (
@@ -441,7 +259,7 @@ const CandidateDetails = () => {
                     </h2>
                   </div>
                   <div className="space-y-6">
-                    {candidate.experience.map((exp, index) => (
+                    {Array.isArray(candidate.experience) && candidate.experience.map((exp: any, index: number) => (
                       <div key={index} className="relative pl-8 pb-6 last:pb-0">
                         {/* Timeline Line */}
                         {index < candidate.experience.length - 1 && (
@@ -472,7 +290,7 @@ const CandidateDetails = () => {
                             <div className="mt-4 pt-4 border-t border-blue-200 dark:border-blue-900/40">
                               <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Uğurlar:</p>
                               <ul className="space-y-2">
-                                {exp.achievements.map((achievement, idx) => (
+                                {Array.isArray(exp.achievements) && exp.achievements.map((achievement: any, idx: number) => (
                                   <li key={idx} className="flex items-start">
                                     <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400 mr-2 mt-0.5 flex-shrink-0" />
                                     <span className="text-sm text-gray-600 dark:text-gray-400">{achievement}</span>
@@ -506,7 +324,7 @@ const CandidateDetails = () => {
                     </h2>
                   </div>
                   <div className="space-y-6">
-                    {candidate.education.map((edu, index) => (
+                    {Array.isArray(candidate.education) && candidate.education.map((edu: any, index: number) => (
                       <div key={index} className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-5 border border-blue-100 dark:border-blue-900/40">
                         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                           {edu.degree}
@@ -550,7 +368,7 @@ const CandidateDetails = () => {
                     </h2>
                   </div>
                   <div className="grid md:grid-cols-2 gap-4">
-                    {candidate.certifications.map((cert, index) => (
+                    {Array.isArray(candidate.certifications) && candidate.certifications.map((cert: any, index: number) => (
                       <div key={index} className="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 border border-blue-100 dark:border-blue-900/40">
                         <h3 className="font-semibold text-gray-900 dark:text-white mb-1">
                           {cert.name}
@@ -587,7 +405,7 @@ const CandidateDetails = () => {
                   </h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {candidate.skills.map((skill, index) => (
+                  {candidate.skills && Array.isArray(candidate.skills) && candidate.skills.map((skill, index) => (
                     <span
                       key={index}
                       className="px-4 py-2 bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium border border-blue-200 dark:border-blue-800"
@@ -616,7 +434,7 @@ const CandidateDetails = () => {
                     </h3>
                   </div>
                   <div className="space-y-3">
-                    {candidate.languages.map((lang, index) => (
+                    {Array.isArray(candidate.languages) && candidate.languages.map((lang: any, index: number) => (
                       <div key={index} className="flex items-center justify-between">
                         <span className="text-gray-700 dark:text-gray-300 font-medium">
                           {lang.name}
