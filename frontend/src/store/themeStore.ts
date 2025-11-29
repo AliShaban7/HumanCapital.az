@@ -8,12 +8,13 @@ interface ThemeStore {
   setTheme: (theme: Theme) => void
 }
 
-// Initialize theme from localStorage or system preference
+// Initialize theme from localStorage, default to light mode
 const getInitialTheme = (): Theme => {
   if (typeof window !== 'undefined') {
     const stored = localStorage.getItem('theme') as Theme | null
     if (stored) return stored
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    // Default to light mode instead of system preference
+    return 'light'
   }
   return 'light'
 }

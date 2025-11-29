@@ -44,29 +44,29 @@ const Header = () => {
           : 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md'
       }`}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="flex items-center justify-between h-20 gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
+          <Link to="/" className="flex items-center space-x-3 group flex-shrink-0">
             <img
               src="/images/HumanCapital_logo.png"
               alt="HumanCapital"
-              className="h-12 w-auto dark:hidden transition-opacity group-hover:opacity-80"
+              className="h-10 w-auto dark:hidden transition-opacity group-hover:opacity-80"
             />
             <img
               src="/images/HumanCapital_whitelogo.png"
               alt="HumanCapital"
-              className="h-12 w-auto hidden dark:block transition-opacity group-hover:opacity-80"
+              className="h-10 w-auto hidden dark:block transition-opacity group-hover:opacity-80"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-1 flex-shrink-0">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
+                className="relative px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group whitespace-nowrap"
               >
                 {link.label}
                 {isActive(link.path) && (
@@ -83,7 +83,7 @@ const Header = () => {
           </nav>
 
           {/* Right Side Actions */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-4 flex-shrink-0">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
