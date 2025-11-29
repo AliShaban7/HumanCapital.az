@@ -1,0 +1,164 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CANDIDATE
+  COMPANY
+}
+
+enum JobCategory {
+  IT
+  MARKETING
+  DESIGN
+  SALES
+  HR
+  FINANCE
+  EDUCATION
+  HEALTHCARE
+  OTHER
+}
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  password  String
+  role      UserRole
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  candidate Candidate?
+  company   Company?
+
+  @@map("users")
+}
+
+model Candidate {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @unique @db.ObjectId
+  firstName   String
+  lastName    String
+  phone       String?
+  city        String?
+  profession  String?
+  bio         String?
+  videoUrl    String?
+  cvUrl       String?
+  portfolio   String?
+  skills      String[]
+  education   Json?
+  experience  Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  applications Application[]
+  savedJobs    SavedJob[]
+  profileViews ProfileView[]
+
+  @@map("candidates")
+}
+
+model Company {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String   @unique @db.ObjectId
+  name        String
+  description String?
+  website     String?
+  logo        String?
+  city        String?
+  phone       String?
+  email       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  jobs Job[]
+
+  @@map("companies")
+}
+
+model Job {
+  id               String      @id @default(auto()) @map("_id") @db.ObjectId
+  companyId        String      @db.ObjectId
+  title            String
+  description      String
+  category         JobCategory
+  city             String
+  salary           String?
+  experience       String?
+  requirements     String?
+  responsibilities String?
+  pdfUrl           String?
+  isActive         Boolean     @default(true)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  company      Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  applications Application[]
+  savedBy      SavedJob[]
+
+  @@map("jobs")
+}
+
+model Application {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  candidateId String  @db.ObjectId
+  jobId     String   @db.ObjectId
+  status    String   @default("pending") // pending, accepted, rejected
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  candidate Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  job       Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@unique([candidateId, jobId])
+  @@map("applications")
+}
+
+model SavedJob {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  candidateId String  @db.ObjectId
+  jobId     String   @db.ObjectId
+  createdAt DateTime @default(now())
+
+  candidate Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  job       Job       @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@unique([candidateId, jobId])
+  @@map("saved_jobs")
+}
+
+model ProfileView {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  candidateId String  @db.ObjectId
+  viewedBy   String?  @db.ObjectId // User ID who viewed (null for anonymous)
+  createdAt  DateTime @default(now())
+
+  candidate Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+
+  @@map("profile_views")
+}
+
+model Article {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  content     String
+  excerpt     String?
+  imageUrl    String?
+  author      String?
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("articles")
+}
+
